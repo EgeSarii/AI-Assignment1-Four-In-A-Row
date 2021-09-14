@@ -1,0 +1,26 @@
+Step 2 :
+
+Making a tree
+
+Şimdi bizden istenen şey şu : Sonraki hamleleri içeren bir tree yapmamız lazım.
+Bu ne demektir? Diyelim tic-tac-toe, orada mesela ilk hamle olarak 9 branch çıkar, çünkü 1st oyuncu
+9 farklı yere bir şey koyabilir. Her bir daldan yine 8 dal çıkar çünkü 2nd oyuncu 8 farklı yere
+bir şey koyabilir.
+
+Bu oyunda aynı böyle ancak daha büyük çaplısı. Şimdi bizim board 6x7 den 42 hamle olasılığı içeriyor.
+Hala oyunun kurallarını tam anlamış değilim. Mesela play() fonksiyonu, sanıyorum onunla biraz uğraşmam 
+gerek, bir analiz şart.
+Nasıl oynandığını çözdükten sonra bir oyun nasıl sub-hamlelere bölünür onu düşünmeliyim.
+Yine parça parça. Clone() fonksiyonu olduğunu hatırlıyorum. Tercihim, mesela Oyun initial olarak boş.
+O zaman, player1 için 42 (veya en yüksek possible hamle) kadar hesaplayıp bu kadar sayıda clone 
+yaratmalıyım yani bir clone dizisi.
+Yeri gelmişken demek ki, max. kaç hamle yapabileceğimi gösteren bir fonksiyon tasarlamalıyım.
+Daha sonra tekrardan bu clone arrayindeki her bir sub-game için yine aynı şeyi tekrarlamalıyım.
+Sanıyorum bu ağaçlar için biraz tree structure larına bakmamda yarar var.
+
+O zaman sırasıyla :
+
+1- play fonksiyonunu ve oyunu iyice araştırmalıyım
+2- Maximum kaç hamle yapabildiğime dair bir fonksiyon geliştirmeliyim
+3- Tree structure ları araştırmalıyım
+4- tree yapmalıyım.

@@ -24,3 +24,10 @@ O zaman sırasıyla :
 2- Maximum kaç hamle yapabildiğime dair bir fonksiyon geliştirmeliyim
 3- Tree structure ları araştırmalıyım
 4- tree yapmalıyım.
+
+-------------------------
+Oyun dusundugum gibi degil. Yani soyle, hakikaten ilk once, column sonuna geliyor. Yani o yuzden ilk basta width kadar hamle imkani var.
+Yani 7. Ancak ikinci oyuncunun da 7. Aslinda fena degil demek ki bir node en fazla 7 dalli olabilir. Cunku hep columnlara koyuyoruz.
+Bu arada column diyorum ancak sanki oyun left yonune 90 derece yatirilmis gibi.
+Her seyi ona gore hesaplamaliyim.
+Guzel o zaman belirledigim ilk maddeyi yaptim

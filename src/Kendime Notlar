@@ -75,4 +75,8 @@ makeATree(board, playerID)
         return boardlist
     else
         currentPlayer = otherPlayer
-        
+-------------------------
+Bir tree structure yapmamiz gerek. Evet nextMove yaptik ancak o kadar dogru olmayabilir cunku arraylari kullandik.
+Onun yerine listleri kullanalim. nextMove u listlere hizlica cevirebiliriz ancak tree methodunu dusunmek zorundayiz.
+Ilk parent node umuz oyunun en bastaki hali yani bos. Sonra onun 7 child i var. Bunu nextMove da ekleyebiliriz. Sonra her child icin 
+bir daha next move ve voila!

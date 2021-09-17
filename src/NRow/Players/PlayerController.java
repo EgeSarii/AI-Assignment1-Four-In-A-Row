@@ -37,4 +37,4 @@ public abstract class PlayerController {
    * @return column integer the player chose
    */
   public abstract int makeMove(Board board);
-}
+} 

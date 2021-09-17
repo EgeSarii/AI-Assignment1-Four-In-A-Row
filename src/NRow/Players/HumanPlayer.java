@@ -37,6 +37,8 @@ public class HumanPlayer extends PlayerController {
     int column = scanner.nextInt();
     
     System.out.println("Selected Column: " + column);
+    
+   
     return column - 1;
   }
 

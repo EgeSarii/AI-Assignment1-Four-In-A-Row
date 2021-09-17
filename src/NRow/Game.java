@@ -33,6 +33,7 @@ public class Game {
     while (!this.isOver()) {
       // turn player can make a move
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
+     
       
       // other player can make a move now
       currentPlayer = (currentPlayer == 0) ? 1 : 0;
@@ -147,5 +148,31 @@ public class Game {
     
     return -1; // Game is a draw
   }
+
+  /**
+   * returns an array containing every possible move for the next round for that player
+   * @param board the board to check
+   * @param playerID the player to check for
+   * @return an array of every possible move
+   */
+  public Board[] nextMove(Board board, int playerId)
+  {
+      
+      Board[] nextMoves= new Board[7];
+      for(int i=0; i<board.width; i++)
+      {
+        Board cloneBoard = new Board (board);
+        if(cloneBoard.isValid(i))
+        {
+          cloneBoard.play(i, playerId);
+          nextMoves[i] = cloneBoard;
+        }
+      }
+      return nextMoves;
+  }
+
+
+
+
 
 }

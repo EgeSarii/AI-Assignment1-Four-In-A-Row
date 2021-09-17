@@ -162,16 +162,31 @@ public class Game {
       for(int i=0; i<board.width; i++)
       {
         Board cloneBoard = new Board (board);
-        if(cloneBoard.isValid(i))
+        if(cloneBoard.play(i, playerId))
         {
-          cloneBoard.play(i, playerId);
           nextMoves[i] = cloneBoard;
         }
       }
       return nextMoves;
   }
 
+/**
+   * returns a boolean value about the possibility of move
+   * @param board the board to check
+   * @return if there is any possible move left
+   */
 
+   public boolean moveLeft (Board board)
+   {
+    for (int i=0 ;i<7 ;i++)
+    {
+      if(!board.isValid(i))
+      {
+        return false;
+      }
+    }
+    return true;
+   }
 
 
 

@@ -49,11 +49,30 @@ currentPlayer = playerId
 boardList = nextMove(board, currentPlayer)
 currentPlayer = otherPlayer
 for(int i =0; i<7; i++)
-    new Array[7] = makeATree(boardList[i], currentPlayer)
+    new Array[7] = makeATree(boardList[i], currentPlayer
+
+return 
+------------------------------
+Peki yani versiyonunu dusundugum saniyorum komple hamle yapilabilir mi gibi bir fonksiyon yapayim :
+
+booelan nextMovePossible(board)
+for int i=0 i<7 i++
+    if(!board.isValid(i))
+        return false
+
+return true;
+
+O zaman yeni versiyon soyle bir sey oluveriyor. Base case olarak baska hamle var mi yok mu onu cozmek istiyorum. Eger hamle varsa recursion
+yoksa zaten fonksyion sahip oldugu veriyi dondurmeli. Ancak recursionu nasil yapabilirim. Ben 7li dongu halinde recursion yapiyorum
+Ama bunu nasil yapanilirm. Binary tree yapabilirim hakkaten ama cok sacma olur. 
 
 
+makeATree(board, playerID)
 
-
-
-
-
+    currentPlayer = playerID
+    boardList = nextMove(board, currentPlayer)
+    if (!moveLeft(board))
+        return boardlist
+    else
+        currentPlayer = otherPlayer
+        

@@ -57,3 +57,34 @@ for(int i =0; i<7; i++)
 
 
 
+    new Array[7] = makeATree(boardList[i], currentPlayer
+
+return 
+------------------------------
+Peki yani versiyonunu dusundugum saniyorum komple hamle yapilabilir mi gibi bir fonksiyon yapayim :
+
+booelan nextMovePossible(board)
+for int i=0 i<7 i++
+    if(!board.isValid(i))
+        return false
+
+return true;
+
+O zaman yeni versiyon soyle bir sey oluveriyor. Base case olarak baska hamle var mi yok mu onu cozmek istiyorum. Eger hamle varsa recursion
+yoksa zaten fonksyion sahip oldugu veriyi dondurmeli. Ancak recursionu nasil yapabilirim. Ben 7li dongu halinde recursion yapiyorum
+Ama bunu nasil yapanilirm. Binary tree yapabilirim hakkaten ama cok sacma olur. 
+
+
+makeATree(board, playerID)
+
+    currentPlayer = playerID
+    boardList = nextMove(board, currentPlayer)
+    if (!moveLeft(board))
+        return boardlist
+    else
+        currentPlayer = otherPlayer
+-------------------------
+Bir tree structure yapmamiz gerek. Evet nextMove yaptik ancak o kadar dogru olmayabilir cunku arraylari kullandik.
+Onun yerine listleri kullanalim. nextMove u listlere hizlica cevirebiliriz ancak tree methodunu dusunmek zorundayiz.
+Ilk parent node umuz oyunun en bastaki hali yani bos. Sonra onun 7 child i var. Bunu nextMove da ekleyebiliriz. Sonra her child icin 
+bir daha next move ve voila!

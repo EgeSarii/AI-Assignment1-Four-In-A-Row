@@ -10,6 +10,7 @@ import NRow.Heuristics.Heuristic;
  */
 public class HumanPlayer extends PlayerController {
   Scanner scanner = new Scanner(System.in);
+ 
 
   /**
    * Create human player, enabling human computer interaction through the console

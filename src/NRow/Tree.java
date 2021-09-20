@@ -9,7 +9,6 @@ public class Tree {
 
     private Node root;
 
-
     public Tree(Board init_board){
 
        this.root = buildTree(null, init_board, 1);
@@ -36,6 +35,18 @@ public class Tree {
         }
         return node;
 
+    }
+
+    public void showTree()
+    {
+        showTree (this.root);
+    }
+    private void showTree(Node node)
+    {
+        for(Node child : node.children)
+        {
+            System.out.println(child.data);
+        }
     }
 
     class Node {

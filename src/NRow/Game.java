@@ -7,6 +7,7 @@ public class Game {
   private PlayerController[] players;
   private Board gameBoard;
   private int winner;
+ // private Tree tree;
 
   /**
    * Create a new game
@@ -20,6 +21,7 @@ public class Game {
     this.gameN = gameN;
     this.players = players;
     this.gameBoard = new Board(boardWidth, boardHeight);
+   // this.tree = new Tree(gameBoard);
   }
 
   /**
@@ -32,6 +34,11 @@ public class Game {
 
     while (!this.isOver()) {
       // turn player can make a move
+      System.out.println("anan");
+
+      //tree.showTree();
+
+
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
      
       

@@ -151,45 +151,6 @@ public class Game {
     return -1; // Game is a draw
   }
 
-  /**
-   * returns an array containing every possible move for the next round for that player
-   * @param board the board to check
-   * @param playerID the player to check for
-   * @return an array of every possible move
-   */
-  public Board[] nextMove(Board board, int playerId)
-  {
-      
-      Board[] nextMoves= new Board[7];
-      for(int i=0; i<board.width; i++)
-      {
-        Board cloneBoard = new Board (board);
-        if(cloneBoard.play(i, playerId))
-        {
-          nextMoves[i] = cloneBoard;
-        }
-      }
-      return nextMoves;
-  }
-
-/**
-   * returns a boolean value about the possibility of move
-   * @param board the board to check
-   * @return if there is any possible move left
-   */
-
-   public boolean moveLeft (Board board)
-   {
-    for (int i=0 ;i<7 ;i++)
-    {
-      if(!board.isValid(i))
-      {
-        return false;
-      }
-    }
-    return true;
-   }
-
-
+  
 
 }

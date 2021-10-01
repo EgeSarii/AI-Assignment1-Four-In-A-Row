@@ -75,4 +75,16 @@ makeATree(board, playerID)
         return boardlist
     else
         currentPlayer = otherPlayer
+
+------------------------------------------------------------------------------
+27.09.2021
+changePlayer() methodu yapabilirim :
+
+changePlayer(int playerID){
+    int nextPlayer = (playerId == 1) ? 2 : 1;
+}
+
+Hmm gorunen o ki biz bir seyleri yanlis yaptik. Minimax i minmaxplayer classina uygulamam gerekiyormus. Ancak bunu yapabilirim sanirim.
+Aslinda dusunursek daha iyi cunku hazir bir layout var ve beli daha hizli ilerlerim.
+
         

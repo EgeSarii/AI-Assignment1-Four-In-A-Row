@@ -1,0 +1,6 @@
+Torpuleme
+
+
+1.) Board clone icin direkt getNewBoard kullanabiliriz
+2.) O yaptigimiz agaca gerek yok aslinda yani soyle gerek yok biz zaten her row icin oynandiginda hesaplanabilir bir agac 
+donduruyoruz. Ancak bunu heuristicte evalActions yapiyor yani onu duzeltebiliriz.

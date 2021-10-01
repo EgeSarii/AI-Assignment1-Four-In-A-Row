@@ -7,8 +7,6 @@ public class Game {
   private PlayerController[] players;
   private Board gameBoard;
   private int winner;
- // private Tree tree;
-
   /**
    * Create a new game
    * @param gameN N in a row required to win
@@ -21,7 +19,8 @@ public class Game {
     this.gameN = gameN;
     this.players = players;
     this.gameBoard = new Board(boardWidth, boardHeight);
-   // this.tree = new Tree(gameBoard);
+    System.out.println("started");
+    System.out.println("finish");
   }
 
   /**
@@ -31,21 +30,15 @@ public class Game {
   public int startGame() {
     System.out.println("Start game!");
     int currentPlayer = 0;
-
     while (!this.isOver()) {
       // turn player can make a move
-      System.out.println("anan");
-
-      //tree.showTree();
-
-
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
-     
-      
+      //tree.miniMax();
+      //tree.showTree();
       // other player can make a move now
       currentPlayer = (currentPlayer == 0) ? 1 : 0;
+      //break;
     }
-
 
     System.out.println(gameBoard);
     if(winner < 0) {
@@ -56,6 +49,7 @@ public class Game {
     System.out.println("Player " + players[0] + " evaluated a boardstate " + players[0].getEvalCount() + " times.");
     System.out.println("Player " + players[1] + " evaluated a boardstate " + players[1].getEvalCount() + " times.");
     return winner;
+
   }
 
   /**

@@ -1,14 +1,14 @@
 package NRow;
 
-import NRow.Heuristics.SimpleHeuristic;
-import NRow.Players.HumanPlayer;
+import NRow.Heuristics.MiniMaxHeuristics;
+import NRow.Players.MinMaxPlayer;
 import NRow.Players.PlayerController;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        int gameN = 4;
-        int boardWidth = 7;
-        int boardHeight = 6;
+        int gameN = 2;
+        int boardWidth = 5;
+        int boardHeight = 4;
 
         PlayerController[] players = getPlayers(gameN);
 
@@ -22,11 +22,11 @@ public class App {
      * @return an array of size 2 with two Playercontrollers
      */
     private static PlayerController[] getPlayers(int n) {
-        SimpleHeuristic heuristic1 = new SimpleHeuristic(n);
-        SimpleHeuristic heuristic2 = new SimpleHeuristic(n);
+        MiniMaxHeuristics heuristic1 = new MiniMaxHeuristics(n);
+        MiniMaxHeuristics heuristic2 = new MiniMaxHeuristics(n);
 
-        PlayerController human = new HumanPlayer(1, n, heuristic1);
-        PlayerController human2 = new HumanPlayer(2, n, heuristic2);
+        PlayerController human = new MinMaxPlayer(1, n, heuristic1);
+        PlayerController human2 = new MinMaxPlayer(2, n, heuristic2);
 
         //TODO: Implement other PlayerControllers (MinMax, AlphaBeta)
 

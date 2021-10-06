@@ -1,7 +1,6 @@
 package NRow;
 
 import NRow.Players.PlayerController;
-
 public class Game {
   private int gameN;
   private PlayerController[] players;
@@ -48,7 +47,11 @@ public class Game {
     }
     System.out.println("Player " + players[0] + " evaluated a boardstate " + players[0].getEvalCount() + " times.");
     System.out.println("Player " + players[1] + " evaluated a boardstate " + players[1].getEvalCount() + " times.");
-    return winner;
+    return winner; 
+
+    //System.out.print("nitti");
+
+    
 
   }
 

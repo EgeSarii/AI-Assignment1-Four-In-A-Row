@@ -86,5 +86,31 @@ changePlayer(int playerID){
 
 Hmm gorunen o ki biz bir seyleri yanlis yaptik. Minimax i minmaxplayer classina uygulamam gerekiyormus. Ancak bunu yapabilirim sanirim.
 Aslinda dusunursek daha iyi cunku hazir bir layout var ve beli daha hizli ilerlerim.
+----------------------------------------------------------------------
+03.10.2021
 
-        
+Eveeettt... Şimdi şöyle yapacağız. Bir kere heuristic evaluate board kullanacagız ve depth tabii ki de.
+Algoritma şu şekilde : Tahtayı alıyoruz, oyuncusuna göre miniMax algoritması çalıştırıyoruz. Minimax
+algoritması da şöyle. Tahtayı alıyor. Eger final node yani leaf ise winning değeri dönüyor. Eğer depth==0 
+ise o zaman heuristic değeri dönüyor. Buna göre bir miniMax yapıyoruz
+Daha detaylı yapmak gerek. Mesela komple bütün  bir ağaç oluşturmamalıyız. Yani eğer şimdiki miniMax 
+algortimasını değiştirirsem hiçbir işe yaramaz. Çünkü yine ağacı komple oluşturmuş olacağım.
+Öyle ki, step by step şöyle olmalı :
+1. Girdi olarak board, player, depth alsın.
+2. Board için bir node oluştursun. 
+    Eğer game over is node leaf tir. Bu node u değeriyle oluştursun döndürsün.
+    Eğer game over değilse ancak depth==0 ise heuristic.evaluate döndürsün
+    Eğer game over değilse ancak depth 0 değilse o zaman bir child yapsın depth-1 ile ve yine 
+    aynı fonksiyonu recursivlesin
+---------------------
+04.10.2021
+
+MiniMax algoritmasina deoth ekledim. Ama aslinda agac olusturma algoritmaina depth ekledim, miniMaxta bir sey degistirmedim.
+Simdi yapmam gereken iki sey kaldi. Birincisi tree olusturma ile miniMax i birlestirmem gerekiyor. Belki bunu yapmasam da olur,
+gorecegiz. Ikinci olarak miniMax heuristic sinifini silmem ve tum minimax algoritmasini (eger birlestirmediysem tree isini de) miniMax
+player sinifina atmam gerek.
+Yani hepsi makeMove sinifinda olmali.
+Saniyorum bundan sonra kabaca bitmis diyebilirim.
+
+Ilk olarak player sinifina tasiyayim. Bunun icin tree sinifini komple tasisam bence olur.
+Agac ile miniMax i birlestirmeme gerek yok. Agac olusturup miniMax yapmam yeterli.

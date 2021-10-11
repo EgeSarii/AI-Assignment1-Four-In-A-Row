@@ -6,29 +6,31 @@ import NRow.Heuristics.Heuristic;
 import java.util.Scanner;
 import NRow.Tree.*;
 
-
 /**
- * Player class for MinMaxPlayer
+ * Player class for AlphaBetaPlayer
  */
 
-public class MinMaxPlayer extends PlayerController {
-
+public class AlphaBetaPlayer extends PlayerController {
+    
     Scanner scanner = new Scanner(System.in);
     private int depth;
     final int Player_MAX = 1; //the maximizing player X
     final int Player_MIN = 2; // the minimizing player O
+    final int Alpha_init = Integer.MIN_VALUE; // initial value of alpha
+    final int Beta_int = Integer.MAX_VALUE; // initial value of beta
 
     /**
-     * Constructor method for MinMaxPlayer
+     * Constructor method for AlphaBetaPlayer
      * @param playerId   playerID 1 or 2
      * @param gameN      gameN of the game
      * @param depth      depth of the tree to be built
      * @param heuristic  heuristics to be used for evaluation
      */
-    public MinMaxPlayer(int playerId, int gameN, int depth, Heuristic heuristic) 
-    {
+
+    public AlphaBetaPlayer(int playerId, int gameN, int depth, Heuristic heuristic) {
         super(playerId, gameN, heuristic);
         this.depth = depth;
+        //You can add functionality which runs when the player is first created (before the game starts)
     }
 
 
@@ -48,7 +50,7 @@ public class MinMaxPlayer extends PlayerController {
                 if(board.isValid(i)) { //if the move is valid
                     Board newBoard = board.getNewBoard(i, playerId); // Get a new board resulting from that move
                     Tree gameTree = new Tree(newBoard, gameN, playerId,depth); // create a game tree based on that board as the root
-                    int value = minMax(gameTree); //evaluate that new board to get a heuristic value from it by using minMax algorithm
+                    int value = minMax_Alpha_Beta(gameTree,Alpha_init, Beta_int); //evaluate that new board to get a heuristic value from it by using minMax_Alpha_Beta algorithm
                     if(value > maxValue) // if minMax returns a higher value then the other column option does
                     {
                         maxValue = value; // then the maximumValue is this value
@@ -66,22 +68,27 @@ public class MinMaxPlayer extends PlayerController {
         System.out.println("Selected Column: " + column);
         return column - 1;        
     }
+
     /**
-     * public method of minMax algorithm. It is used for the game trees itself and called once.
+     * public method of minMax algorithm with pruning. It is used for the game trees itself and called once.
      * @param tree the tree to be applied minMax
+     * @param alpha the initial alpha value which is negative infinity
+     * @param beta the initial beta value which is positive infinity
      * @return the miniMax value of the tree itself
      */
-    public int minMax(Tree tree)
+    public int minMax_Alpha_Beta(Tree tree, int alpha, int beta)
     {
-        return (minMax(tree.root));
+        return (minMax_Alpha_Beta(tree.root, alpha, beta));
     }
 
     /**
-     * private method of minMax algorithm. It is used for the evaluation of nodes and leafs. It is called recursively.
+     * private method of minMax algorithm with pruning. It is used for the evaluation of nodes and leafs. It is called recursively.
      * @param node node to be evaluated and/or applied minMax
+     * @param alpha the alpha value
+     * @param beta the beta value
      * @return the evaluated value of a leaf or the minMax value of a node
      */
-    private int minMax(Node node) {
+    private int minMax_Alpha_Beta(Node node,int alpha, int beta) {
         if (node.children.isEmpty()) // it is Leaf or depth is reached
         {
             return heuristic.evaluateBoard(node.player, node.board); // return the evaluated value
@@ -92,24 +99,34 @@ public class MinMaxPlayer extends PlayerController {
                 int maximumVal = Integer.MIN_VALUE; // initialize the maximum value as negative infinity
                 for (Node child : node.children) // for each child the node has
                 {
-                    int value = minMax(child); // assign the value to minMax value of the child
+                    int value = minMax_Alpha_Beta(child, alpha, beta); // assign the value to minMax value of the child
                     maximumVal = Math.max(value, maximumVal); // if the maximum value is bigger than the minMax value, don't change  
                                                              // the maximum value, else update the maximum value with minMax value
+                    alpha = Math.max(value, alpha);  // if the alpha is bigger than the minMax value, don't change it
+                                                    // if it is not, the minMax value is bigger, then update alpha with the minMax value
+                    if(beta <= alpha) { // if beta value is less or equal to alpha
+                        break;          // prune the next branches
+                    }
                 }
-                return maximumVal;  // return the maximum value as the minMax value
+                return maximumVal; // return the maximum value as the minMax value
 
                 
-            }
+            } 
             else // the playerID of the node is equal to maximizing player, 2
             {
-                int minimumVal = Integer.MAX_VALUE; // initialize the minimum value as positive infinity           
+                int minimumVal = Integer.MAX_VALUE; // initialize the minimum value as positive infinity
                 for (Node child : node.children) // for each child the node has
                 {
-                    int value = minMax(child); // assign the value to minMax value of the child
+                    int value = minMax_Alpha_Beta(child,alpha,beta); // assign the value to minMax value of the child
                     minimumVal = Math.min(value, minimumVal);// if the minimum value is less than the minMax value, don't change  
                                                             // the minimum value, else update the minimum value with minMax value
+                    beta = Math.min(value, beta);  //if the beta value is less than the minMax value, don't change it
+                                                   // if it is not, the minMax value is less, then update beta with the minMax value
+                    if(beta <= alpha){// if beta value is less or equal to alpha
+                        break;       // prune the next branches
+                    }
                 }
-                return minimumVal;  // return the minimum value as the minMax value
+                return minimumVal;// return the minimum value as the minMax value
             }
 
         }

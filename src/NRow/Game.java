@@ -1,11 +1,13 @@
 package NRow;
 
 import NRow.Players.PlayerController;
+
 public class Game {
   private int gameN;
   private PlayerController[] players;
   private Board gameBoard;
   private int winner;
+
   /**
    * Create a new game
    * @param gameN N in a row required to win
@@ -18,8 +20,6 @@ public class Game {
     this.gameN = gameN;
     this.players = players;
     this.gameBoard = new Board(boardWidth, boardHeight);
-    System.out.println("started");
-    System.out.println("finish");
   }
 
   /**
@@ -29,15 +29,15 @@ public class Game {
   public int startGame() {
     System.out.println("Start game!");
     int currentPlayer = 0;
+
     while (!this.isOver()) {
       // turn player can make a move
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
-      //tree.miniMax();
-      //tree.showTree();
+      
       // other player can make a move now
       currentPlayer = (currentPlayer == 0) ? 1 : 0;
-      //break;
     }
+
 
     System.out.println(gameBoard);
     if(winner < 0) {
@@ -47,12 +47,7 @@ public class Game {
     }
     System.out.println("Player " + players[0] + " evaluated a boardstate " + players[0].getEvalCount() + " times.");
     System.out.println("Player " + players[1] + " evaluated a boardstate " + players[1].getEvalCount() + " times.");
-    return winner; 
-
-    //System.out.print("nitti");
-
-    
-
+    return winner;
   }
 
   /**
@@ -111,7 +106,7 @@ public class Game {
     
     // Ascending Diagonal Check
     for (int i = 0; i < (board.length - (gameN - 1)); i++) {
-      for (int j = board[i].length - 1; j > gameN - 1; j--) {
+      for (int j = board[i].length - 1; j >= gameN - 1; j--) {
         if (board[i][j] != 0) {
           player = board[i][j];
           for (int x = 1; x < gameN; x++) {
@@ -154,7 +149,5 @@ public class Game {
     
     return -1; // Game is a draw
   }
-
-  
 
 }

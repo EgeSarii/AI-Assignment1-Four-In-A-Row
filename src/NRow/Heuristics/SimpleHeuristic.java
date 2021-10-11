@@ -9,6 +9,8 @@ public class SimpleHeuristic extends Heuristic {
         super(gameN);
     }
 
+    
+
     @Override
     protected String name() {
         return "Simple";

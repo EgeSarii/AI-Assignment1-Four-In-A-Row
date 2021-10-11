@@ -4,3 +4,16 @@ Torpuleme
 1.) Board clone icin direkt getNewBoard kullanabiliriz
 2.) O yaptigimiz agaca gerek yok aslinda yani soyle gerek yok biz zaten her row icin oynandiginda hesaplanabilir bir agac 
 donduruyoruz. Ancak bunu heuristicte evalActions yapiyor yani onu duzeltebiliriz.
+-------------
+3.) MAXPLAYER =1 diye enum ya da int global değer falan yaratabiliriz 
+
+-----------------------------------------------------------------------------
+2. şeyi anlamadım???? Keşke daha açık yazsaymışım :))
+
+her neyse açıklama kısmına depth olayını yazmayı unutma :
+
+Minimax te biz depth implement edebilirdik ancak etmedik çünkü bunu ağacın her bir node unun bir depth 
+attribute u olması gerekiyordu. Ancak biz sona ulaştığımızı minimAx algoritmasında node un çocuğu olup
+olmamasından anlıyoruz.
+
+4.) Biz aynı heuristic mi kullanalım yoksa farklı farklı mı saydıralım fark eder mi ?

@@ -105,7 +105,7 @@ algortimasını değiştirirsem hiçbir işe yaramaz. Çünkü yine ağacı komp
 ---------------------
 04.10.2021
 
-MiniMax algoritmasina deoth ekledim. Ama aslinda agac olusturma algoritmaina depth ekledim, miniMaxta bir sey degistirmedim.
+MiniMax algoritmasina depth ekledim. Ama aslinda agac olusturma algoritmaina depth ekledim, miniMaxta bir sey degistirmedim.
 Simdi yapmam gereken iki sey kaldi. Birincisi tree olusturma ile miniMax i birlestirmem gerekiyor. Belki bunu yapmasam da olur,
 gorecegiz. Ikinci olarak miniMax heuristic sinifini silmem ve tum minimax algoritmasini (eger birlestirmediysem tree isini de) miniMax
 player sinifina atmam gerek.
@@ -114,3 +114,29 @@ Saniyorum bundan sonra kabaca bitmis diyebilirim.
 
 Ilk olarak player sinifina tasiyayim. Bunun icin tree sinifini komple tasisam bence olur.
 Agac ile miniMax i birlestirmeme gerek yok. Agac olusturup miniMax yapmam yeterli.
+------------------------------------------------------------
+08.10.2021
+
+Sona geldik. Sanıyorum hem MiniMax hem de pruning hazır. Bugün biraz reporta başladım. Ancak detayı 
+yarın.
+---------------------------------------------------------------
+09.10.2021
+Bugün kodu düzenleyip bitireceğim. Fonksiyonların methodların yanına açıklama ekleyeceğim. Gerekli
+yerlerde fazladan comment kullanırım. Bir de fazla sınıfları ve gereksiz metodları sileceğim.
+
+Şimdilik MinMaxPlayer ı bırakacağım. Ancak doğru olan alternative olan. Yani onu açıklamak çok daha 
+kolay ve doğru olan o zaten onu açıklayacağım. Ya da çalıştığından emin olup orijinalini silebilirim.
+Neyse ilk önce board game gibi orijinal şeylerden başlayayım.
+
+Tree için de sanırım alternative olanını sileceğim ya da başka bir yere taşımak en doğrusu.
+Sanıyorum class açıklamaları da ekleyebilirim.
+
+Bir kopya oluşturdum olmadı değişiklikleri geri getirebilirim.
+
+
+Çok salakça bir açıklık buldum. Tree yi oluştururken her node için bir value veriyordum ve bu valuelar
+heuristic kullanıyordu ki aslında bu da evalcount ı arttırıyordu. Öyle olunca alpha beta yı gözlemleye
+miyordum. Oysa ben heuristic i miniMAx içinde kullanmalıydım. Neyse hallettim.
+
+Tree nin bir depth attribute u olup olmamasına sonra karar vereceğim. Şimdilik bir aksiyon yok Algoritma
+çalışıyor.

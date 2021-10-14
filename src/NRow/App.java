@@ -28,17 +28,17 @@ public class App {
         SimpleHeuristic heuristic1 = new SimpleHeuristic(n);
         SimpleHeuristic heuristic2 = new SimpleHeuristic(n);
 
-        PlayerController human = new HumanPlayer(1, n, heuristic1);
-        PlayerController human2 = new HumanPlayer(2, n, heuristic2);
+        PlayerController human = new HumanPlayer(1, n, heuristic1);  //first player of human
+        PlayerController human2 = new HumanPlayer(2, n, heuristic2); //second player of human
         
         
-        PlayerController miniMax1 = new MinMaxPlayer(1, n, 6 ,heuristic1);
-        PlayerController miniMax2 = new MinMaxPlayer(2, n, 6, heuristic2);
+        PlayerController miniMax1 = new MinMaxPlayer(1, n, 2 ,heuristic1); //first player of MinMax 
+        PlayerController miniMax2 = new MinMaxPlayer(2, n, 2, heuristic2); //second player of  MinMax
 
-        PlayerController alphaBeta1 = new AlphaBetaPlayer(1, n, 6 ,heuristic1);
-        PlayerController alphaBeta2 = new AlphaBetaPlayer(2, n, 6, heuristic2);
-     
-        PlayerController[] players = { miniMax1, miniMax2 };
+        PlayerController alphaBeta1 = new AlphaBetaPlayer(1, n, 2 ,heuristic1);// first player of Alpha-Beta
+        PlayerController alphaBeta2 = new AlphaBetaPlayer(2, n, 2, heuristic2);// second player of Alpha-Beta
+        // Choose two players from above
+        PlayerController[] players = { alphaBeta1,alphaBeta2 };
         
         return players;
     }

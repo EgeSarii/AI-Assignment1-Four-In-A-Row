@@ -36,10 +36,9 @@ public class Tree {
      */
     public Node buildTree(Board board, int playerId, int gameN, int depth) {
 
-        Node node;
+        Node node = new Node(board, playerId); // creates a new node for tree;
         int winner = Game.winning(board.getBoardState(), gameN);  //gets the result of a boardstate
         boolean isOver = winner != 0; // if the result is not 0, then the game is over
-        node = new Node(board, playerId); // creates a new node for tree
         if (!(isOver || depth==0)) // If game is not over or the depth is not reached 
                                   //then it is a Node and the tree must continue to grow
         {

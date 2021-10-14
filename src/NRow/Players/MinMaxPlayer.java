@@ -48,10 +48,10 @@ public class MinMaxPlayer extends PlayerController {
                 if(board.isValid(i)) { //if the move is valid
                     Board newBoard = board.getNewBoard(i, playerId); // Get a new board resulting from that move
                     Tree gameTree = new Tree(newBoard, gameN, playerId,depth); // create a game tree based on that board as the root
-                    int value = minMax(gameTree); //evaluate that new board to get a heuristic value from it by using minMax algorithm
-                    if(value > maxValue) // if minMax returns a higher value then the other column option does
+                    int minMaxvalue = minMax(gameTree); //evaluate that new board to get a heuristic value from it by using minMax algorithm
+                    if(maxValue < minMaxvalue) // if minMax returns a higher value then the other column option does
                     {
-                        maxValue = value; // then the maximumValue is this value
+                        maxValue = minMaxvalue; // then the maximumValue is this value
                         maxMove = i; // and the optimal column is this column
                     }
                 }
@@ -92,8 +92,8 @@ public class MinMaxPlayer extends PlayerController {
                 int maximumVal = Integer.MIN_VALUE; // initialize the maximum value as negative infinity
                 for (Node child : node.children) // for each child the node has
                 {
-                    int value = minMax(child); // assign the value to minMax value of the child
-                    maximumVal = Math.max(value, maximumVal); // if the maximum value is bigger than the minMax value, don't change  
+                    int minMaxvalue = minMax(child); // assign the value to minMax value of the child
+                    maximumVal = Math.max(minMaxvalue, maximumVal); // if the maximum value is bigger than the minMax value, don't change  
                                                              // the maximum value, else update the maximum value with minMax value
                 }
                 return maximumVal;  // return the maximum value as the minMax value
@@ -105,8 +105,8 @@ public class MinMaxPlayer extends PlayerController {
                 int minimumVal = Integer.MAX_VALUE; // initialize the minimum value as positive infinity           
                 for (Node child : node.children) // for each child the node has
                 {
-                    int value = minMax(child); // assign the value to minMax value of the child
-                    minimumVal = Math.min(value, minimumVal);// if the minimum value is less than the minMax value, don't change  
+                    int minMaxvalue = minMax(child); // assign the value to minMax value of the child
+                    minimumVal = Math.min(minMaxvalue, minimumVal);// if the minimum value is less than the minMax value, don't change  
                                                             // the minimum value, else update the minimum value with minMax value
                 }
                 return minimumVal;  // return the minimum value as the minMax value

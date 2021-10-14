@@ -17,7 +17,7 @@ public class AlphaBetaPlayer extends PlayerController {
     final int Player_MAX = 1; //the maximizing player X
     final int Player_MIN = 2; // the minimizing player O
     final int Alpha_init = Integer.MIN_VALUE; // initial value of alpha
-    final int Beta_int = Integer.MAX_VALUE; // initial value of beta
+    final int Beta_init = Integer.MAX_VALUE; // initial value of beta
 
     /**
      * Constructor method for AlphaBetaPlayer
@@ -50,10 +50,10 @@ public class AlphaBetaPlayer extends PlayerController {
                 if(board.isValid(i)) { //if the move is valid
                     Board newBoard = board.getNewBoard(i, playerId); // Get a new board resulting from that move
                     Tree gameTree = new Tree(newBoard, gameN, playerId,depth); // create a game tree based on that board as the root
-                    int value = minMax_Alpha_Beta(gameTree,Alpha_init, Beta_int); //evaluate that new board to get a heuristic value from it by using minMax_Alpha_Beta algorithm
-                    if(value > maxValue) // if minMax returns a higher value then the other column option does
+                    int minMaxvalue = minMax_Alpha_Beta(gameTree,Alpha_init, Beta_init); //evaluate that new board to get a heuristic value from it by using minMax_Alpha_Beta algorithm
+                    if(minMaxvalue > maxValue) // if minMax returns a higher value then the other column option does
                     {
-                        maxValue = value; // then the maximumValue is this value
+                        maxValue = minMaxvalue; // then the maximumValue is this value
                         maxMove = i; // and the optimal column is this column
                     }
                 }
@@ -99,14 +99,16 @@ public class AlphaBetaPlayer extends PlayerController {
                 int maximumVal = Integer.MIN_VALUE; // initialize the maximum value as negative infinity
                 for (Node child : node.children) // for each child the node has
                 {
-                    int value = minMax_Alpha_Beta(child, alpha, beta); // assign the value to minMax value of the child
-                    maximumVal = Math.max(value, maximumVal); // if the maximum value is bigger than the minMax value, don't change  
+                    int minMaxvalue = minMax_Alpha_Beta(child, alpha, beta); // assign the value to minMax value of the child
+                    maximumVal = Math.max(minMaxvalue, maximumVal); // if the maximum value is bigger than the minMax value, don't change  
                                                              // the maximum value, else update the maximum value with minMax value
-                    alpha = Math.max(value, alpha);  // if the alpha is bigger than the minMax value, don't change it
+                    alpha = Math.max(minMaxvalue, alpha);  // if the alpha is bigger than the minMax value, don't change it
                                                     // if it is not, the minMax value is bigger, then update alpha with the minMax value
-                    if(beta <= alpha) { // if beta value is less or equal to alpha
+                    if(beta <= maximumVal) { // if beta value is less or equal to maximum value
                         break;          // prune the next branches
                     }
+                    alpha = Math.max(maximumVal, alpha);  // if the alpha is bigger than the minMax value, don't change it
+                                                    // if it is not, the minMax value is bigger, then update alpha with the minMax value
                 }
                 return maximumVal; // return the maximum value as the minMax value
 
@@ -117,14 +119,15 @@ public class AlphaBetaPlayer extends PlayerController {
                 int minimumVal = Integer.MAX_VALUE; // initialize the minimum value as positive infinity
                 for (Node child : node.children) // for each child the node has
                 {
-                    int value = minMax_Alpha_Beta(child,alpha,beta); // assign the value to minMax value of the child
-                    minimumVal = Math.min(value, minimumVal);// if the minimum value is less than the minMax value, don't change  
+                    int minMaxvalue = minMax_Alpha_Beta(child,alpha,beta); // assign the value to minMax value of the child
+                    minimumVal = Math.min(minMaxvalue, minimumVal);// if the minimum value is less than the minMax value, don't change  
                                                             // the minimum value, else update the minimum value with minMax value
-                    beta = Math.min(value, beta);  //if the beta value is less than the minMax value, don't change it
-                                                   // if it is not, the minMax value is less, then update beta with the minMax value
-                    if(beta <= alpha){// if beta value is less or equal to alpha
+                    
+                    if(minimumVal<= alpha){// if minimum value value is less or equal to alpha
                         break;       // prune the next branches
                     }
+                    beta = Math.min(minimumVal, beta);  //if the beta value is less than the minMax value, don't change it
+                                                   // if it is not, the minMax value is less, then update beta with the minMax value
                 }
                 return minimumVal;// return the minimum value as the minMax value
             }

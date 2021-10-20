@@ -1,0 +1,142 @@
+Step 2 :
+
+Making a tree
+
+Şimdi bizden istenen şey şu : Sonraki hamleleri içeren bir tree yapmamız lazım.
+Bu ne demektir? Diyelim tic-tac-toe, orada mesela ilk hamle olarak 9 branch çıkar, çünkü 1st oyuncu
+9 farklı yere bir şey koyabilir. Her bir daldan yine 8 dal çıkar çünkü 2nd oyuncu 8 farklı yere
+bir şey koyabilir.
+
+Bu oyunda aynı böyle ancak daha büyük çaplısı. Şimdi bizim board 6x7 den 42 hamle olasılığı içeriyor.
+Hala oyunun kurallarını tam anlamış değilim. Mesela play() fonksiyonu, sanıyorum onunla biraz uğraşmam 
+gerek, bir analiz şart.
+Nasıl oynandığını çözdükten sonra bir oyun nasıl sub-hamlelere bölünür onu düşünmeliyim.
+Yine parça parça. Clone() fonksiyonu olduğunu hatırlıyorum. Tercihim, mesela Oyun initial olarak boş.
+O zaman, player1 için 42 (veya en yüksek possible hamle) kadar hesaplayıp bu kadar sayıda clone 
+yaratmalıyım yani bir clone dizisi.
+Yeri gelmişken demek ki, max. kaç hamle yapabileceğimi gösteren bir fonksiyon tasarlamalıyım.
+Daha sonra tekrardan bu clone arrayindeki her bir sub-game için yine aynı şeyi tekrarlamalıyım.
+Sanıyorum bu ağaçlar için biraz tree structure larına bakmamda yarar var.
+
+O zaman sırasıyla :
+
+1- play fonksiyonunu ve oyunu iyice araştırmalıyım
+2- Maximum kaç hamle yapabildiğime dair bir fonksiyon geliştirmeliyim
+3- Tree structure ları araştırmalıyım
+4- tree yapmalıyım.
+
+
+
+-------------------------
+Oyun dusundugum gibi degil. Yani soyle, hakikaten ilk once, column sonuna geliyor. Yani o 
+yuzden ilk basta width kadar hamle imkani var.
+Yani 7. Ancak ikinci oyuncunun da 7. Aslinda fena degil demek ki bir node en fazla 7 dalli olabilir. 
+Cunku hep columnlara koyuyoruz.
+Bu arada column diyorum ancak sanki oyun left yonune 90 derece yatirilmis gibi.
+Her seyi ona gore hesaplamaliyim.
+Guzel o zaman belirledigim ilk maddeyi yaptim
+
+------------------------
+nextMove() ile sonraki rounda dair hangi oyuncu ise onun oynayacağı tüüm hamleleri gösterebiliyorum.
+Şimdi yapmam gereken şey şu: Bunu ard arda yapmak. Yani mesela o nextMove lardan birini alıp onun
+üstüne sonraki oyuncu ile bir daha nextMove yapmam. Bir tür bir recursive kurmam.
+Bu recursion da base case, valid move kalıp kalmaması.
+Valid move olduğu sürece, nextMove yapmalı, o nextMovedan her biri için tekrardan recursion foksiyonunu
+uygulamalı. Şunun gibi :
+
+makeATree (board, playerId)
+currentPlayer = playerId
+boardList = nextMove(board, currentPlayer)
+currentPlayer = otherPlayer
+for(int i =0; i<7; i++)
+    new Array[7] = makeATree(boardList[i], currentPlayer
+
+return 
+------------------------------
+Peki yani versiyonunu dusundugum saniyorum komple hamle yapilabilir mi gibi bir fonksiyon yapayim :
+
+booelan nextMovePossible(board)
+for int i=0 i<7 i++
+    if(!board.isValid(i))
+        return false
+
+return true;
+
+O zaman yeni versiyon soyle bir sey oluveriyor. Base case olarak baska hamle var mi yok mu onu cozmek istiyorum. Eger hamle varsa recursion
+yoksa zaten fonksyion sahip oldugu veriyi dondurmeli. Ancak recursionu nasil yapabilirim. Ben 7li dongu halinde recursion yapiyorum
+Ama bunu nasil yapanilirm. Binary tree yapabilirim hakkaten ama cok sacma olur. 
+
+
+makeATree(board, playerID)
+
+    currentPlayer = playerID
+    boardList = nextMove(board, currentPlayer)`
+    if (!moveLeft(board))
+        return boardlist
+    else
+        currentPlayer = otherPlayer
+
+------------------------------------------------------------------------------
+27.09.2021
+changePlayer() methodu yapabilirim :
+
+changePlayer(int playerID){
+    int nextPlayer = (playerId == 1) ? 2 : 1;
+}
+
+Hmm gorunen o ki biz bir seyleri yanlis yaptik. Minimax i minmaxplayer classina uygulamam gerekiyormus. Ancak bunu yapabilirim sanirim.
+Aslinda dusunursek daha iyi cunku hazir bir layout var ve beli daha hizli ilerlerim.
+----------------------------------------------------------------------
+03.10.2021
+
+Eveeettt... Şimdi şöyle yapacağız. Bir kere heuristic evaluate board kullanacagız ve depth tabii ki de.
+Algoritma şu şekilde : Tahtayı alıyoruz, oyuncusuna göre miniMax algoritması çalıştırıyoruz. Minimax
+algoritması da şöyle. Tahtayı alıyor. Eger final node yani leaf ise winning değeri dönüyor. Eğer depth==0 
+ise o zaman heuristic değeri dönüyor. Buna göre bir miniMax yapıyoruz
+Daha detaylı yapmak gerek. Mesela komple bütün  bir ağaç oluşturmamalıyız. Yani eğer şimdiki miniMax 
+algortimasını değiştirirsem hiçbir işe yaramaz. Çünkü yine ağacı komple oluşturmuş olacağım.
+Öyle ki, step by step şöyle olmalı :
+1. Girdi olarak board, player, depth alsın.
+2. Board için bir node oluştursun. 
+    Eğer game over is node leaf tir. Bu node u değeriyle oluştursun döndürsün.
+    Eğer game over değilse ancak depth==0 ise heuristic.evaluate döndürsün
+    Eğer game over değilse ancak depth 0 değilse o zaman bir child yapsın depth-1 ile ve yine 
+    aynı fonksiyonu recursivlesin
+---------------------
+04.10.2021
+
+MiniMax algoritmasina depth ekledim. Ama aslinda agac olusturma algoritmaina depth ekledim, miniMaxta bir sey degistirmedim.
+Simdi yapmam gereken iki sey kaldi. Birincisi tree olusturma ile miniMax i birlestirmem gerekiyor. Belki bunu yapmasam da olur,
+gorecegiz. Ikinci olarak miniMax heuristic sinifini silmem ve tum minimax algoritmasini (eger birlestirmediysem tree isini de) miniMax
+player sinifina atmam gerek.
+Yani hepsi makeMove sinifinda olmali.
+Saniyorum bundan sonra kabaca bitmis diyebilirim.
+
+Ilk olarak player sinifina tasiyayim. Bunun icin tree sinifini komple tasisam bence olur.
+Agac ile miniMax i birlestirmeme gerek yok. Agac olusturup miniMax yapmam yeterli.
+------------------------------------------------------------
+08.10.2021
+
+Sona geldik. Sanıyorum hem MiniMax hem de pruning hazır. Bugün biraz reporta başladım. Ancak detayı 
+yarın.
+---------------------------------------------------------------
+09.10.2021
+Bugün kodu düzenleyip bitireceğim. Fonksiyonların methodların yanına açıklama ekleyeceğim. Gerekli
+yerlerde fazladan comment kullanırım. Bir de fazla sınıfları ve gereksiz metodları sileceğim.
+
+Şimdilik MinMaxPlayer ı bırakacağım. Ancak doğru olan alternative olan. Yani onu açıklamak çok daha 
+kolay ve doğru olan o zaten onu açıklayacağım. Ya da çalıştığından emin olup orijinalini silebilirim.
+Neyse ilk önce board game gibi orijinal şeylerden başlayayım.
+
+Tree için de sanırım alternative olanını sileceğim ya da başka bir yere taşımak en doğrusu.
+Sanıyorum class açıklamaları da ekleyebilirim.
+
+Bir kopya oluşturdum olmadı değişiklikleri geri getirebilirim.
+
+
+Çok salakça bir açıklık buldum. Tree yi oluştururken her node için bir value veriyordum ve bu valuelar
+heuristic kullanıyordu ki aslında bu da evalcount ı arttırıyordu. Öyle olunca alpha beta yı gözlemleye
+miyordum. Oysa ben heuristic i miniMAx içinde kullanmalıydım. Neyse hallettim.
+
+Tree nin bir depth attribute u olup olmamasına sonra karar vereceğim. Şimdilik bir aksiyon yok Algoritma
+çalışıyor.

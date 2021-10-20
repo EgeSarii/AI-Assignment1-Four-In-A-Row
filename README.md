@@ -7,5 +7,7 @@ There are some significant remarks on this project. First of all, I should indic
 
 I have implemented the algorithm in Java and used VSCode. The source code can be dowloaded and also installed on any Java running platform. There are three posssible players : Human, MinMax and AlphaBeta. They can be chosen in the App.java file. Also I didn't implemented the program such that it plays by itself, it gives recommendation for the next move.
 
+I have also recorded my progress and the challenges I encountered and thoughts about possible solutions in the file Kendime Notlar.txt. But it is Turkish unfortunately.
+
 It was a good experiment about AI implementations in real world.
 
